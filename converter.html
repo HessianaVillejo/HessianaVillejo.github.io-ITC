@@ -5,75 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unit Converter</title>
     <style>
-        body 
-        {
-            background-color: #4C1D3D;
-            color: #FFBB94;
+        body {
+            background-color: #f8d7da; /* Light pink background */
+            color: #4c1d3d;
             font-family: Arial, sans-serif;
-            text-align: center;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
         }
 
-        h2 
-        {
-            color: #FB9590;
+        h2 {
+            color: #db7093;
+            margin-bottom: 20px;
         }
 
-        input, select, button 
-        {
+        input, select, button {
             margin: 10px;
             padding: 10px;
             border-radius: 5px;
-            background-color: #852E4E;
-            color: #FFBB94;
-            border: 2px solid #DC586D;
-        }
-
-        input[type="number"], select 
-        {
+            background-color: #852e4e;
+            color: #fff;
+            border: 2px solid #dc586d;
             width: 250px;
         }
 
-        button 
-        {
+        button {
             cursor: pointer;
         }
 
-        button:hover 
-        {
-            background-color: #FB9590;
-            color: #4C1D3D;
+        button:hover {
+            background-color: #fb9590;
+            color: #4c1d3d;
         }
 
-        .result 
-        {
+        .result {
             margin-top: 20px;
             font-size: 1.2em;
-            color: #FB9590;
+            color: #db7093;
         }
 
-        footer 
-        {
-            margin-top: 50px;
+        footer {
+            margin-top: 30px;
             font-size: 14px;
-            color: #FB9590;
         }
 
-        .home 
-        {
+        .home {
             padding: 10px 20px;
-            background-color: #A33757;
-            border: 2px solid #FB9590;
+            background-color: #a33757;
+            border: 2px solid #fb9590;
             border-radius: 5px;
-            color: #FFBB94;
+            color: #fff;
             text-decoration: none;
         }
 
-        .home:hover 
-        {
-            background-color: #FB9590;
-            color: #4C1D3D;
+        .home:hover {
+            background-color: #fb9590;
+            color: #4c1d3d;
         }
     </style>
 </head>
@@ -96,20 +88,17 @@
     </footer>
 
     <script>
-        function convert() 
-        {
+        function convert() {
             const inputValue = parseFloat(document.getElementById("inputValue").value);
             const conversionType = document.getElementById("conversionType").value;
             let result;
 
-            if (isNaN(inputValue)) 
-            {
+            if (isNaN(inputValue)) {
                 document.getElementById("result").innerText = "Please enter a valid number.";
                 return;
             }
 
-            switch (conversionType) 
-            {
+            switch (conversionType) {
                 case "cToF":
                     result = (inputValue * 9 / 5) + 32;
                     document.getElementById("result").innerText = `${inputValue}°C = ${result.toFixed(2)}°F`;
