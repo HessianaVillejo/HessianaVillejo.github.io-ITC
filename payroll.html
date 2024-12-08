@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Payroll</title>
+    <style>
+        body {
+            background-color: #fce4ec;
+            color: #880e4f;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: #e91e63;
+            margin-bottom: 20px;
+        }
+
+        .form-container, .payroll-container {
+            width: 80%;
+            max-width: 900px;
+            background-color: #f8bbd0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .form-container input, .form-container button {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: none;
+            background-color: #e91e63;
+            color: white;
+            font-size: 1.1em;
+        }
+
+        .form-container input {
+            margin-top: 20px;
+        }
+
+        .form-container input[type="number"] {
+            width: calc(50% - 20px);
+            display: inline-block;
+        }
+
+        .form-container input[type="text"] {
+            width: calc(50% - 20px);
+            display: inline-block;
+        }
+
+        .form-container button {
+            background-color: #d81b60;
+        }
+
+        .form-container button:hover {
+            background-color: #f06292;
+            cursor: pointer;
+        }
+
+        .payroll-container {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th, td {
+            padding: 15px;
+            border: 1px solid #e91e63;
+        }
+
+        th {
+            background-color: #ec407a;
+            color: white;
+        }
+
+        td {
+            background-color: #f8bbd0;
+        }
+
+        td, th {
+            font-size: 1.1em;
+        }
+
+        footer {
+            font-size: 16px;
+            color: #e91e63;
+            margin-top: 20px;
+        }
+
+        footer a {
+            text-decoration: none;
+            color: #880e4f;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            color: #d81b60;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Simple Payroll System</h2>
+
+    <div class="form-container">
+        <input type="text" id="empName" placeholder="Employee Name" />
+        <input type="number" id="daysWorked" placeholder="Days Worked" />
+        <input type="number" id="dailyRate" placeholder="Daily Rate" />
+        <input type="number" id="deductionAmount" placeholder="Deduction Amount" />
+        <button onclick="addEmployee()">Add Employee</button>
+    </div>
+
+    <div class="payroll-container">
+        <h3>Payroll List</h3>
+        <table id="payrollTable">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Employee Name</th>
+                    <th>Days Worked</th>
+                    <th>Daily Rate</th>
+                    <th>Gross Pay</th>
+                    <th>Deduction Amount</th>
+                    <th>Net Pay</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="form-container">
+        <input type="number" id="lineToDelete" placeholder="Enter Line No. to Delete" />
+        <button onclick="deleteEmployee()">Delete Employee</button>
+    </div>
+
+    <footer>
+        <a href="index.html">Return to Home</a>
+    </footer>
+
+    <script>
+        let payrollList = [];
+
+        function addEmployee() {
+            const empName = document.getElementById("empName").value;
+            const daysWorked = parseInt(document.getElementById("daysWorked").value);
+            const dailyRate = parseFloat(document.getElementById("dailyRate").value);
+            const deductionAmount = parseFloat(document.getElementById("deductionAmount").value);
+
+            if (isNaN(daysWorked) || isNaN(dailyRate) || isNaN(deductionAmount) || empName === "") {
+                alert("Please fill in all fields correctly.");
+                return;
+            }
+
+            const grossPay = daysWorked * dailyRate;
+            const netPay = grossPay - deductionAmount;
+
+            payrollList.push({ empName, daysWorked, dailyRate, grossPay, deductionAmount, netPay });
+
+            updateTable();
+        }
+
+        function deleteEmployee() {
+            const lineNumber = parseInt(document.getElementById("lineToDelete").value) - 1;
+
+            if (isNaN(lineNumber) || lineNumber < 0 || lineNumber >= payrollList.length) {
+                alert("Please enter a valid line number.");
+                return;
+            }
+            payrollList.splice(lineNumber, 1);
+            updateTable();
+        }
+
+        function updateTable() {
+            const tableBody = document.getElementById("payrollTable").getElementsByTagName("tbody")[0];
+            tableBody.innerHTML = "";
+
+            payrollList.forEach((employee, index) => {
+                const row = tableBody.insertRow();
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${employee.empName}</td>
+                    <td>${employee.daysWorked}</td>
+                    <td>${employee.dailyRate.toFixed(2)}</td>
+                    <td>${employee.grossPay.toFixed(2)}</td>
+                    <td>${employee.deductionAmount.toFixed(2)}</td>
+                    <td>${employee.netPay.toFixed(2)}</td>
+                `;
+            });
+        }
+    </script>
+
+</body>
+</html>
