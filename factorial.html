@@ -5,81 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>First N Natural Numbers</title>
     <style>
-        body 
-        {
-            background-color: #4C1D3D;
-            color: #FFBB94;
+        body {
+            background-color: #f8d7da; /* Light pink background */
+            color: #4c1d3d;
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
-        h2 
-        {
-            color: #FB9590;
+        h2 {
+            color: #db7093;
             font-size: 2.5em;
+            margin-bottom: 20px;
         }
 
-        .container 
-        {
+        .container {
             margin-top: 40px;
+            width: 100%;
+            max-width: 400px;
         }
 
-        .form-group 
-        {
+        .form-group {
             margin: 15px;
         }
 
-        input, select, button 
-        {
-            width: 220px;
+        input, select, button {
+            width: 100%;
             padding: 10px;
-            margin: 10px;
+            margin: 10px 0;
             border-radius: 5px;
-            border: 1px solid #A33757;
-            background-color: #A33757;
+            border: 1px solid #a33757;
+            background-color: #a33757;
             color: #FFBB94;
         }
 
-        button:hover 
-        {
-            background-color: #DC586D;
+        button:hover {
+            background-color: #dc586d;
             cursor: pointer;
         }
 
-        .result 
-        {
+        .result {
             margin-top: 20px;
             font-size: 1.2em;
-            color: #FB9590;
+            color: #db7093;
         }
 
-        footer 
-        {
+        footer {
             margin-top: 40px;
         }
 
-        footer a 
-        {
-            color: #FB9590;
+        footer a {
+            color: #db7093;
             text-decoration: none;
         }
 
-        .home 
-        {
+        .home {
             padding: 10px 20px;
-            background-color: #A33757;
-            border: 2px solid #FB9590;
+            background-color: #a33757;
+            border: 2px solid #db7093;
             border-radius: 5px;
             color: #FFBB94;
             text-decoration: none;
         }
 
-        .home:hover 
-        {
-            background-color: #FB9590;
-            color: #4C1D3D;
+        .home:hover {
+            background-color: #db7093;
+            color: #4c1d3d;
         }
     </style>
 </head>
@@ -110,24 +107,20 @@
     </footer>
 
     <script>
-        function calculate() 
-        {
+        function calculate() {
             const n = parseInt(document.getElementById("nValue").value);
             const operation = document.getElementById("operation").value;
             let result = 0;
 
-            if (isNaN(n) || n <= 0) 
-            {
+            if (isNaN(n) || n <= 0) {
                 document.getElementById("result").innerText = "Please enter a positive number for N.";
                 return;
             }
 
-            switch (operation) 
-            {
+            switch (operation) {
                 case "factorial":
                     result = 1;
-                    for (let i = 1; i <= n; i++) 
-                    {
+                    for (let i = 1; i <= n; i++) {
                         result *= i;
                     }
                     document.getElementById("result").innerText = `Factorial of ${n} is ${result}.`;
@@ -135,18 +128,15 @@
                 case "sum":
                     let sum = 0;
                     let i = 1;
-                    do 
-                    {
+                    do {
                         sum += i;
                         i++;
-                    } 
-                    while (i <= n);
+                    } while (i <= n);
                     document.getElementById("result").innerText = `Sum of first ${n} natural numbers is ${sum}.`;
                     break;
                 case "average":
                     let total = 0;
-                    for (let i = 1; i <= n; i++) 
-                    {
+                    for (let i = 1; i <= n; i++) {
                         total += i;
                     }
                     result = total / n;
