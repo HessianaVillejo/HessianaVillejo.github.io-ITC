@@ -97,29 +97,40 @@
         <a href="index.html" class="home">Back to Homepage</a>
     </footer>
 
-    <script>
-        function computeTax() {
-            const incomeInput = document.getElementById("taxableIncome").value.trim(); // Trim to remove extra spaces
-            const taxableIncome = parseFloat(incomeInput);
+ <script>
+        function computeTax() 
+        {
+            const taxableIncome = parseFloat(document.getElementById("taxableIncome").value);
+            let tax = 0;
 
-            if (!incomeInput || isNaN(taxableIncome) || taxableIncome < 0) {
-                document.getElementById("result").innerText = "Please enter a valid positive income.";
+            if (isNaN(taxableIncome)) 
+            {
+                document.getElementById("result").innerText = "Please enter a valid income.";
                 return;
             }
 
-            let tax = 0;
-
-            if (taxableIncome <= 250000) {
+            if (taxableIncome <= 250000) 
+            {
                 tax = 0;
-            } else if (taxableIncome <= 400000) {
+            } 
+            else if (taxableIncome <= 400000) 
+            {
                 tax = (taxableIncome - 250000) * 0.2;
-            } else if (taxableIncome <= 800000) {
+            } 
+            else if (taxableIncome <= 800000) 
+            {
                 tax = 30000 + (taxableIncome - 400000) * 0.25;
-            } else if (taxableIncome <= 2000000) {
+            } 
+            else if (taxableIncome <= 2000000) 
+            {
                 tax = 130000 + (taxableIncome - 800000) * 0.3;
-            } else if (taxableIncome <= 8000000) {
+            } 
+            else if (taxableIncome <= 8000000) 
+            {
                 tax = 490000 + (taxableIncome - 2000000) * 0.32;
-            } else {
+            } 
+            else 
+            {
                 tax = 2410000 + (taxableIncome - 8000000) * 0.35;
             }
 
