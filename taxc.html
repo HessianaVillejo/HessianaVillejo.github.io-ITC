@@ -85,23 +85,22 @@
             id="taxableIncome" 
             placeholder="Enter your taxable income" 
             inputmode="numeric" 
-            pattern="\d*" 
         />
         <button onclick="computeTax()">Calculate Tax</button>
         <div class="result" id="result"></div>
     </div>
 
- 
-
     <script>
         function computeTax() {
-            const taxableIncome = parseFloat(document.getElementById("taxableIncome").value);
-            let tax = 0;
+            const incomeInput = document.getElementById("taxableIncome").value.trim(); // Trim to remove extra spaces
+            const taxableIncome = parseFloat(incomeInput);
 
-            if (isNaN(taxableIncome)) {
-                document.getElementById("result").innerText = "Please enter a valid income.";
+            if (!incomeInput || isNaN(taxableIncome) || taxableIncome < 0) {
+                document.getElementById("result").innerText = "Please enter a valid positive income.";
                 return;
             }
+
+            let tax = 0;
 
             if (taxableIncome <= 250000) {
                 tax = 0;
